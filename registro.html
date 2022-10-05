@@ -1,37 +1,73 @@
 <!DOCTYPE html>
 <html lang="es-AR">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="estilos.css">
-    <title>Registro</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="estilos.css">
+  <script src="https://kit.fontawesome.com/7e5b2d153f.js"crossorigin="anonymous"></script>
+  <script defer src="index.js"></script>
+  <link rel="icon" type="image/png" href="favicon.png"/>
+  <title>Registro | gapa</title>    
 </head>
 
 <body>
-    <div class="padre">
-        <header class="header">NavBar</header>
-        <article class="articulo">
-            <h1>Registrarse en Ticketera</h1><br/>
-            <div align="left" >
-            <h2>Empresa: </h2>
-            <input type="name" name="" id="nombre"><br/>
-            <h2>Nombre: </h2>
-            <input type="name" name="" id="nombre"><br/>
-            <h2>Apellido:</h2>
-            <input type="name" name="" id="apellido"><br/>
-            <h2>Email:</h2>
-            <input type="email" name="" id="mail"><br/>
-            <h2>Usuario:</h2>
-            <input type="username" name="" id="usuario"><br/>
-            <h2>Contraseña:</h2>
-            <input type="password" name="" id="contraseña"><br/>
-            </div><br>
-            <a href="login.html"><input type="button" value="Registrarse" ></a>
-        </article>
-        <aside class="aside izquierdo">Publicidad</aside>
-        <aside class="aside derecho">Publicidad</aside>
-        <footer class="footer">Footer</footer>
+
+  <header class="header">
+        <nav class="nav">
+            <a href="#" class="logo nav-link">}gapa{</a>
+            <button class="nav-toggle" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu">
+                <li class="nav-menu-item">
+                    <a href="./login.html" class="nav-menu-link nav-link nav-menu-link_ingresar">Ingresar</a>
+                  </li>
+                  <li class="nav-menu-item">
+                    <a href="./registro.html" class="nav-menu-link nav-link nav-menu-link_registrarse">Registrarse</a>
+                  </li>
+            </ul>
+        </nav>
+  </header>
+
+  <div class="padre">
+        <div class="articulo">
+            <div class="container">
+                <h1 class="articulo_titulo">Registrarse en Ticketera</h1><br/>
+                <div align="left" >
+                <h2 class="articulo_texto">Empresa: </h2>
+                <input type="name" name="" id="nombre"><br/>
+                <h2 class="articulo_texto">Nombre: </h2>
+                <input type="name" name="" id="nombre"><br/>
+                <h2 class="articulo_texto">Apellido:</h2>
+                <input type="name" name="" id="apellido"><br/>
+                <h2 class="articulo_texto">Email:</h2>
+                <input type="email" name="" id="mail"><br/>
+                <h2 class="articulo_texto">Usuario:</h2>
+                <input type="username" name="" id="usuario"><br/>
+                <h2 class="articulo_texto">Contraseña:</h2>
+                <input type="password" name="" id="contraseña"><br/>
+                </div><br>
+                <a href="login.html"><input type="button" value="Registrarse" ></a>
+            </div>
+        </div>
+    
+        <div class="aside izquierdo"></div>
+
+        <div class="aside derecho"></div>
+    
     </div>
+    
+  <footer class="footer">
+        <div id="menu-social" class="menu">
+            <ul id="menu-social-items" class="menu-items">
+                <li><a href="https://www.facebook.com" target=”_blank”></a></li>
+                <li><a href="https://twitter.com" target=”_blank”></a></li>
+                <li><a href="http://mail.google.com/mail?hl=es-419" target=”_blank”></a></li>   
+                <li><a href="https://www.whatsapp.com" target=”_blank”></a></li>
+                <li><a href="https://www.instagram.com" target=”_blank”></a></li>
+            </ul>
+        </div>
+    </footer> 
+
 </body>
-</html>
