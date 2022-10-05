@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos.css">
+    <title>Nuevo Ticket</title>
+</head>
+
+<body>
+    <div class="padre">
+        <header class="header">NavBar</header>
+        <article class="articulo">
+            <h1>Generar Ticket</h1>
+            <div align="left" >
+            <h2>Ticket Nº: </h2>
+            <input type="number" name="Numero">
+            <h2>Empresa: </h2> 
+            <select name="Empresa">
+                <option>Empresa 1</option>
+                <option>Empresa 2</option>
+                <option>Empresa 3</option>
+                <option>Empresa 4</option>
+                <option>Empresa 5</option>
+                <option>Empresa 6</option>    
+            </select>
+            <h2>Motivo: </h2>
+            <select name="Motivo">
+                <option>Seleccionar Motivo</option>
+                <option>Ingreso a la Web</option>
+                <option>Recupero de Usuario</option>
+                <option>Sobre Ticket</option>
+                <option>Modificacion Email</option>
+                <option>Software de Escritorio</option>
+                
+            </select>
+            
+            <h2>Detalles: </h2>
+            <form name="formulario" method="post" action="/send.php">
+                    
+            <textarea name="texto" cols="80" rows="10"placeholder="Escriba detalle de Motivo" 
+            required
+            ></textarea>  
+            </form>
+            </div>
+            <br/>
+            <a href="confirmacion-ticket.html"><input type="button" value="Enviar" ></a>
+            
+        </article>
+        <aside class="aside izquierdo">Publicidad</aside>
+        <aside class="aside derecho">Publicidad</aside>
+        <footer class="footer">Footer</footer>
+    </div>
+</body>
+</html>
