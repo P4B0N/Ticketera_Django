@@ -21,10 +21,10 @@
             </button>
             <ul class="nav-menu">
                 <li class="nav-menu-item">
-                    <a href="./login.html" class="nav-menu-link nav-link nav-menu-link_ingresar">Ingresar</a>
+                    <a href="{% url "login" %}" class="nav-menu-link nav-link nav-menu-link_ingresar">Ingresar</a>
                   </li>
                   <li class="nav-menu-item">
-                    <a href="./registro.html" class="nav-menu-link nav-link nav-menu-link_registrarse">Registrarse</a>
+                    <a href="{% url "registro" %}" class="nav-menu-link nav-link nav-menu-link_registrarse">Registrarse</a>
                   </li>
             </ul>
         </nav>
@@ -45,8 +45,8 @@
                 <br/>
                 <br/>
                 <br/>
-                <a href="registro.html"><input type="button" value="Registrarse" ></a>
-                <a href="bienvenida.html"><input type="button" value="Ingresar" ></a>
+                <a href="{% url "registro" %}"><input type="button" value="Registrarse" ></a>
+                <a href="{% url "bienvenida" %}"><input type="button" value="Ingresar" ></a>
             </div>
         </div>
     

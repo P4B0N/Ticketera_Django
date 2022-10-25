@@ -21,10 +21,10 @@
             </button>
             <ul class="nav-menu">
                 <li class="nav-menu-item">
-                    <a href="./login.html" class="nav-menu-link nav-link nav-menu-link_ingresar">Ingresar</a>
+                    <a href="{% url "login" %}" class="nav-menu-link nav-link nav-menu-link_ingresar">Ingresar</a>
                   </li>
                   <li class="nav-menu-item">
-                    <a href="./registro.html" class="nav-menu-link nav-link nav-menu-link_registrarse">Registrarse</a>
+                    <a href="{% url "registro" %}" class="nav-menu-link nav-link nav-menu-link_registrarse">Registrarse</a>
                   </li>
             </ul>
         </nav>
@@ -60,13 +60,13 @@
                 <h2 class="articulo_texto">Detalles: </h2>
                 <form name="formulario" method="post" action="/send.php">
                         
-                <textarea name="texto" cols="80" rows="10"placeholder="Escriba detalle de Motivo" 
+                <textarea name="texto" cols="80" rows="10" placeholder="Escriba detalle de Motivo" 
                 required
                 ></textarea>  
                 </form>
                 </div>
                 <br/>
-                <a href="confirmacion-ticket.html"><input type="button" value="Enviar" ></a>
+                <a href="{% url "confirmacion_ticket" %}"><input type="button" value="Enviar" ></a>
             </div>
         </div>
     
