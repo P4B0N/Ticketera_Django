@@ -1,9 +1,9 @@
-from django.urls import path
+from django.urls import path, re_path
 from . import views
 
 urlpatterns = [
     path('', views.index, name="index"),
-    path('ticketera/bienvenida', views.bienvenida, name="bienvenida"),
+    re_path(r'^ticketera/bienvenida/(?P<nombre>\w+)/$', views.bienvenida, name="bienvenida"),
     path('ticketera/confirmacion_ticket', views.confirmacion_ticket, name="confirmacion_ticket"),
     path('ticketera/envio_confirmado', views.envio_confirmado, name="envio_confirmado"),
     path('ticketera/login', views.login, name="login"),
