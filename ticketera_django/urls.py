@@ -19,5 +19,5 @@ from ticketera import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('ticketera/', include('ticketera.urls'))
+    path('', include('ticketera.urls'))
 ]
