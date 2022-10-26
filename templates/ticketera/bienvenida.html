@@ -1,0 +1,22 @@
+{% extends "template_base.html" %}
+{% block titulo %}
+Bienvenido
+{% endblock titulo %}
+{% block contenido %}
+            <div class="container">
+                <div align="center" >
+                    <br/>
+                    <br/>
+                    <br/>
+                    <h1 class="articulo_titulo">BIENVENIDO!!!</h1>
+                    <br/>
+                    <br/>
+                    <h2 class="articulo_texto">{{nombre}}</h2>
+                </div>
+                <br/>
+                <br/>
+                <br/>
+                <a href="{% url "nuevo_ticket" %}"><input type="button" value="INICIAR TICKET"></a>
+                <a href="{% url "seguimiento" %}"><input type="button" value="SEGUIR TICKET"></a>
+            </div>
+{% endblock contenido %}

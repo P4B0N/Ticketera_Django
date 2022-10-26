@@ -1,0 +1,22 @@
+{% extends "template_base.html" %}
+{% block titulo %}
+Login
+{% endblock titulo %}
+{% block contenido %}
+<div class="container">
+    <h1 class="articulo_titulo">Ingresar</h1><br/>
+    <div align="left" >
+    <h2 class="articulo_texto">Usuario:</h2>
+    <input type="username" name="" id="usuario">
+    <br/>
+    <br/>
+    <h2 class="articulo_texto">Contraseña</h2>
+    <input type="password" name="" id="contraseña"><br/>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <a href="{% url "registro" %}"><input type="button" value="Registrarse" ></a>
+    <a href="{% url "bienvenida" nombre %}"><input type="button" value="Ingresar" ></a>
+</div>
+{% endblock contenido %}

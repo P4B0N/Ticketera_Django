@@ -1,0 +1,24 @@
+{% extends "template_base.html" %}
+{% block titulo %}
+Registro
+{% endblock titulo %}
+{% block contenido %}
+<div class="container">
+    <h1 class="articulo_titulo">Registrarse en Ticketera</h1><br/>
+    <div align="left" >
+    <h2 class="articulo_texto">Empresa: </h2>
+    <input type="name" name="" id="nombre"><br/>
+    <h2 class="articulo_texto">Nombre: </h2>
+    <input type="name" name="" id="nombre"><br/>
+    <h2 class="articulo_texto">Apellido:</h2>
+    <input type="name" name="" id="apellido"><br/>
+    <h2 class="articulo_texto">Email:</h2>
+    <input type="email" name="" id="mail"><br/>
+    <h2 class="articulo_texto">Usuario:</h2>
+    <input type="username" name="" id="usuario"><br/>
+    <h2 class="articulo_texto">Contraseña:</h2>
+    <input type="password" name="" id="contraseña"><br/>
+    </div><br>
+    <a href="{% url "login" %}"><input type="button" value="Registrarse" ></a>
+</div>
+{% endblock contenido %}

@@ -1,0 +1,44 @@
+{% extends "template_base.html" %}
+{% block titulo %}
+Seguimiento
+{% endblock titulo %}
+{% block contenido %}
+<div class="container">
+    <h1 class="articulo_titulo">Seguimiento</h1>
+    <div align="left" >
+    <h2 class="articulo_texto">Empresa: </h2> 
+    <select name="Empresa">
+        <option>Empresa 1</option>
+        <option>Empresa 2</option>
+        <option>Empresa 3</option>
+        <option>Empresa 4</option>
+        <option>Empresa 5</option>
+        <option>Empresa 6</option>    
+    </select>
+    <h2 class="articulo_texto">Estado: </h2>
+    <select name="Estado">
+        <option>Espera</option>
+        <option>En curso</option>
+        <option>Resuelto</option>     
+    </select>
+     </select>
+    <h2 class="articulo_texto">Prioridad: </h2>
+    <select name="Prioridad">
+        <option>Alta</option>
+        <option>Normal</option>
+        <option>Baja</option>     
+    </select>
+    </select>
+    <h2 class="articulo_texto">Ticket Nº: </h2>
+    <select name="Number">
+        <option>001-01</option>
+        <option>001-02</option>
+        <option>001-03</option>     
+    </select>
+    </form>
+    </div>
+    <br/>
+    <a href="{% url "nuevo_ticket" %}"><input type="button" value="Nuevo Ticket" ></a>
+    <a href="{% url "login" %}"><input type="button" value="Salir" ></a>
+</div>
+{% endblock contenido %}

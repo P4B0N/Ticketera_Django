@@ -1,0 +1,21 @@
+{% extends "template_base.html" %}
+{% block titulo %}
+Envío confirmado
+{% endblock titulo %}
+{% block contenido %}
+<div class="container">
+    <div align="center" >
+        <br/>
+        <br/>
+        <br/>
+        <h1 class="articulo_titulo">SU TICKET FUE ENVIADO EXITOSAMENTE!!!</h1>
+        <br/>
+        <br/>
+        </div>
+        <br/>
+        <br/>
+        <br/>
+        <a href="{% url "nuevo_ticket" %}"><input type="button" value="Nuevo Ticket" ></a>
+        <a href="{% url "login" %}"><input type="button" value="Salir" ></a>
+</div>
+{% endblock contenido %}
