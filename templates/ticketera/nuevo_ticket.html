@@ -4,6 +4,7 @@ Nuevo ticket
 {% endblock titulo %}
 {% block contenido %}
 <div class="container">
+    <form name="formulario" method="post" action="/send.php">
     <h1 class="articulo_titulo">Generar Ticket</h1>
     <div align="left" >
     <h2 class="articulo_texto">Ticket Nº: </h2>
@@ -25,18 +26,14 @@ Nuevo ticket
         <option>Sobre Ticket</option>
         <option>Modificacion Email</option>
         <option>Software de Escritorio</option>
-        
     </select>
-    
     <h2 class="articulo_texto">Detalles: </h2>
-    <form name="formulario" method="post" action="/send.php">
-            
     <textarea name="texto" cols="80" rows="10" placeholder="Escriba detalle de Motivo" 
-    required
-    ></textarea>  
+    required></textarea>
     </form>
     </div>
     <br/>
+    <a href="{% url "bienvenida" nombre %}"><input type="button" value="Atras" ></a>
     <a href="{% url "confirmacion_ticket" %}"><input type="button" value="Enviar" ></a>
 </div>
 {% endblock contenido %}
