@@ -32,3 +32,6 @@ def seguimiento(request):
 
 def respuesta_ticket(request):
     return render(request, "ticketera/respuesta_ticket.html",{"nombre":nombre})
+
+def respuesta_enviada(request):
+    return render(request, "ticketera/respuesta_enviada.html",{"nombre":nombre})

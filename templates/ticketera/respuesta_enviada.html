@@ -1,0 +1,21 @@
+{% extends "template_base.html" %}
+{% block titulo %}
+Respuesta Enviada
+{% endblock titulo %}
+{% block contenido %}
+<div class="container">
+    <div align="center" >
+        <br/>
+        <br/>
+        <br/>
+        <h1 class="articulo_titulo">RESPUESTA ENVIADA EXITOSAMENTE!</h1>
+        <br/>
+        <br/>
+        </div>
+        <br/>
+        <br/>
+        <br/>
+        <a href="{% url "bienvenida" nombre %}"><input type="button" value="Atras" ></a>
+        <a href="{% url "login" %}"><input type="button" value="Salir" ></a>
+</div>
+{% endblock contenido %}
