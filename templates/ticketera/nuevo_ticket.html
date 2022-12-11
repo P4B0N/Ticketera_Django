@@ -4,36 +4,23 @@ Nuevo ticket
 {% endblock titulo %}
 {% block contenido %}
 <div class="container">
-    <form name="formulario" method="post" action="/send.php">
-    <h1 class="articulo_titulo">Generar Ticket</h1>
-    <div align="left" >
-    <h2 class="articulo_texto">Ticket Nº: </h2>
-    <input type="number" name="Numero">
-    <h2 class="articulo_texto">Empresa: </h2> 
-    <select name="Empresa">
-        <option>Empresa 1</option>
-        <option>Empresa 2</option>
-        <option>Empresa 3</option>
-        <option>Empresa 4</option>
-        <option>Empresa 5</option>
-        <option>Empresa 6</option>    
-    </select>
-    <h2 class="articulo_texto">Motivo: </h2>
-    <select name="Motivo">
-        <option>Seleccionar Motivo</option>
-        <option>Ingreso a la Web</option>
-        <option>Recupero de Usuario</option>
-        <option>Sobre Ticket</option>
-        <option>Modificacion Email</option>
-        <option>Software de Escritorio</option>
-    </select>
-    <h2 class="articulo_texto">Detalles: </h2>
-    <textarea name="texto" cols="80" rows="10" placeholder="Escriba detalle de Motivo" 
-    required></textarea>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for campo in formulario %}
+        <div>
+            <label for="">{{campo.label}}</label>
+            {{campo}}
+        </div>
+        <div>{{campo.errors}}</div>
+        {% endfor %}
+        <div >
+        <div >
+            <input type="submit" value="Enviar">
+            <a href="{% url "bienvenida" nombre %}"><input type="button" value="Atras" ></a>        
+        </div>
+</div>
     </form>
     </div>
     <br/>
-    <a href="{% url "bienvenida" nombre %}"><input type="button" value="Atras" ></a>
-    <a href="{% url "confirmacion_ticket" %}"><input type="button" value="Enviar" ></a>
 </div>
 {% endblock contenido %}

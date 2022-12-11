@@ -9,7 +9,7 @@ class Usuario (models.Model):
     telefono_usuario = models.CharField(max_length=50, verbose_name="Teléfono")
     nombre_empresa = models.CharField(max_length=50, verbose_name="Empresa")
     usuario = models.CharField(max_length=50, verbose_name="Usuario")
-    contraseña_usuario = models.CharField(max_length=50, verbose_name="Contraseña")#(label="Password", widget=forms.PasswordInput, strip=False)
+    contrasenia_usuario = models.CharField(max_length=50, verbose_name="Contraseña")#(label="Password", widget=forms.PasswordInput, strip=False)
     baja = models.BooleanField(default=False)
       
     def __str__(self):
