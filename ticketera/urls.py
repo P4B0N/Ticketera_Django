@@ -11,5 +11,6 @@ urlpatterns = [
     path('ticketera/registro', views.registro, name="registro"),
     path('ticketera/seguimiento', views.seguimiento, name="seguimiento"),
     path('ticketera/respuesta_ticket', views.respuesta_ticket, name="respuesta_ticket"),
-    path('ticketera/respuesta_enviada', views.respuesta_enviada, name="respuesta_enviada")
+    path('ticketera/respuesta_enviada', views.respuesta_enviada, name="respuesta_enviada"),
+    path('ticketera/registro_empresa', views.registro_empresa, name="registro_empresa"),
 ]
