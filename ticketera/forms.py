@@ -3,6 +3,7 @@ from django.forms import ValidationError
 
 from .models import Ticket, Empresa, Usuario
 
+
 class UsuarioForm(forms.ModelForm):
     
     class Meta:

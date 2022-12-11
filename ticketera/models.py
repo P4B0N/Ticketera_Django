@@ -1,5 +1,8 @@
 from django.db import models
 
+from django.utils import timezone
+from datetime import timedelta
+
 # Create your models here.
 
 class Usuario (models.Model):
@@ -47,9 +50,9 @@ class Ticket (models.Model):
     titulo = models.CharField(max_length=50, verbose_name="Título")
     descripcion = models.CharField(max_length=50, verbose_name="Descripción")
     prioridad = models.CharField(max_length=50, verbose_name="Prioridad")
-    estado = models.CharField(max_length=50, verbose_name="Estado")
-    fecha_creacion = models.DateField(verbose_name="Fecha de creación")
-    fecha_cierre = models.DateField(verbose_name="Fecha de cierre") 
+    estado = models.CharField(max_length=50, verbose_name="Estado", default="Espera")
+    fecha_creacion = models.DateField(verbose_name="Fecha de creación", default=timezone.now())
+    fecha_cierre = models.DateField(verbose_name="Fecha de cierre", default=timezone.now()+timedelta(days=30)) 
     usuario = models.ManyToManyField(Usuario, verbose_name="Usuario")
     empresa = models.ForeignKey(Empresa, on_delete=models.CASCADE, verbose_name="Empresa")
     
