@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from ticketera.models import Ticket
-from ticketera.forms import UsuarioForm, TicketForm
+from ticketera.forms import UsuarioForm, TicketForm, EmpresaForm
 
 from django.contrib import messages
 
@@ -50,3 +50,11 @@ def respuesta_ticket(request):
 
 def respuesta_enviada(request):
     return render(request, "ticketera/respuesta_enviada.html",{"nombre":nombre})
+
+def registro_empresa(request):
+    formulario = EmpresaForm(request.POST or None,request.FILES or None)
+    if formulario.is_valid():
+        formulario.save()
+        messages.success(request,'Se ha registrado la empresa correctamente')          
+        return redirect('login')
+    return render(request, "ticketera/registro_empresa.html",{"formulario":formulario})

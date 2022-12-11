@@ -80,3 +80,30 @@ class TicketForm(forms.ModelForm):
         queryset=Empresa.objects.filter(baja=False),
         widget=forms.Select()
     )
+    
+
+class EmpresaForm(forms.ModelForm):
+    
+    class Meta:
+        model = Empresa
+        fields=['nombre_empresa','direccion_empresa','telefono_empresa','email_empresa']
+        
+    nombre_empresa=forms.CharField(
+            label='Nombre', 
+            widget=forms.TextInput()
+        )
+    
+    direccion_empresa=forms.CharField(
+            label='Dirección', 
+            widget=forms.TextInput()
+        )
+    
+    telefono_empresa=forms.CharField(
+            label='Teléfono', 
+            widget=forms.TextInput()
+        )
+    
+    email_empresa=forms.CharField(
+            label='Email', 
+            widget=forms.TextInput()
+        )
