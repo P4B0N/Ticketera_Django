@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from ticketera.models import Ticket
-from ticketera.forms import UsuarioForm, TicketForm, EmpresaForm
+from ticketera.forms import UsuarioForm, UserForm, TicketForm, EmpresaForm
 
 from django.contrib import messages
 
@@ -35,11 +35,18 @@ def nuevo_ticket(request):
 
 def registro(request):
     formulario = UsuarioForm(request.POST or None,request.FILES or None)
-    if formulario.is_valid():
-        formulario.save()
+    formulario_user = UserForm(request.POST or None,request.FILES or None)
+    if formulario.is_valid() and formulario_user.is_valid():
+        usuario = formulario.save(commit=False)
+        
+        usuario_user = formulario_user.save()
+        usuario.user = usuario_user
+        
+        usuario.save()
+        
         messages.success(request,'Se ha creado el usuario correctamente')          
         return redirect('login')
-    return render(request, "ticketera/registro.html",{"formulario":formulario})
+    return render(request, "ticketera/registro.html",{"formulario":formulario, "formulario_user":formulario_user})
 
 def seguimiento(request):
     tickets = Ticket.objects.all()

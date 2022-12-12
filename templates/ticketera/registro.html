@@ -6,6 +6,15 @@ Registro
 <div class="container">
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
+
+        {% for campo in formulario_user %}
+        <div>
+            <label for="">{{campo.label}}</label>
+            {{campo}}
+        </div>
+        <div>{{campo.errors}}</div>
+        {% endfor %}
+
         {% for campo in formulario %}
         <div>
             <label for="">{{campo.label}}</label>
