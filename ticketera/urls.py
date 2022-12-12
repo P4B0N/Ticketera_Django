@@ -13,4 +13,5 @@ urlpatterns = [
     path('ticketera/respuesta_ticket', views.respuesta_ticket, name="respuesta_ticket"),
     path('ticketera/respuesta_enviada', views.respuesta_enviada, name="respuesta_enviada"),
     path('ticketera/registro_empresa', views.registro_empresa, name="registro_empresa"),
+    path('ticketera/logout', views.logout_view, name="logout"),
 ]

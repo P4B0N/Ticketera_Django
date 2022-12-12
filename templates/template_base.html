@@ -25,12 +25,14 @@
                 <i class="fas fa-bars"></i>
             </button>
             <ul class="nav-menu">
-                <li class="nav-menu-item">
-                    <a href="{% url "login" %}" class="nav-menu-link nav-link nav-menu-link_ingresar">Ingresar</a>
-                  </li>
-                  <li class="nav-menu-item">
-                    <a href="{% url "registro" %}" class="nav-menu-link nav-link nav-menu-link_registrarse">Registrarse</a>
-                  </li>
+              {% if user.is_authenticated %}
+                <p>Bienvenido/a, <b>{{ user.username }}</b>.</p>
+                <a type="button" href="{% url 'logout' %}">Cerrar sesión</a>
+              {% else %}
+              <li class="nav-menu-item">
+                <a href="{% url "registro" %}" class="nav-menu-link nav-link nav-menu-link_registrarse">Registrarse</a>
+              </li>
+              {% endif %}
             </ul>
         </nav>
   </header>
