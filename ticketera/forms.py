@@ -3,27 +3,54 @@ from django.forms import ValidationError
 
 from .models import Ticket, Empresa, Usuario
 
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
-class UsuarioForm(forms.ModelForm):
+
+class UserForm(UserCreationForm):
     
     class Meta:
-        model = Usuario
-        fields=['nombre_usuario','apellido_usuario','email_usuario','telefono_usuario','nombre_empresa','usuario','contrasenia_usuario']
+        model = User
+        fields=['first_name','last_name','email','username','password1','password2']
         
-    nombre_usuario=forms.CharField(
+    first_name=forms.CharField(
             label='Nombre', 
             widget=forms.TextInput()
         )
     
-    apellido_usuario=forms.CharField(
+    last_name=forms.CharField(
             label='Apellido', 
             widget=forms.TextInput()
         )
     
-    email_usuario=forms.CharField(
+    email=forms.CharField(
             label='Email', 
             widget=forms.TextInput()
         )
+    
+    username=forms.CharField(
+            label='Nombre de usuario', 
+            widget=forms.TextInput()
+        )
+    
+    password1=forms.CharField(
+            label="Password",
+            widget=forms.PasswordInput(),
+            strip=False
+        )
+
+    password2=forms.CharField(
+            label="Repita el password",
+            widget=forms.PasswordInput(),
+            strip=False
+        )
+  
+  
+class UsuarioForm(forms.ModelForm):
+    
+    class Meta:
+        model = Usuario
+        fields=['telefono_usuario','nombre_empresa']
     
     telefono_usuario=forms.CharField(
             label='Teléfono', 
@@ -35,20 +62,7 @@ class UsuarioForm(forms.ModelForm):
             queryset=Empresa.objects.filter(baja=False),
             widget=forms.Select()
         )
-    
-    usuario=forms.CharField(
-            label='Nombre de usuario', 
-            widget=forms.TextInput()
-        )
-    
-    contrasenia_usuario=forms.CharField(
-            label="Password",
-            widget=forms.PasswordInput(),
-            strip=False
-        )
-        
-        
-
+               
 
 class TicketForm(forms.ModelForm):
     
