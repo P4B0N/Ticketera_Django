@@ -30,9 +30,10 @@ class UsuarioForm(forms.ModelForm):
             widget=forms.TextInput()
         )
     
-    nombre_empresa=forms.CharField(
-            label='Nombre de Empresa', 
-            widget=forms.TextInput()
+    nombre_empresa=forms.ModelChoiceField(
+            label='Nombre de Empresa',
+            queryset=Empresa.objects.filter(baja=False),
+            widget=forms.Select()
         )
     
     usuario=forms.CharField(
@@ -51,14 +52,9 @@ class UsuarioForm(forms.ModelForm):
 
 class TicketForm(forms.ModelForm):
     
-    PRIORIDAD = (('','Seleccionar'),
-                 (1,'Baja'),
-                 (2,'Media'),
-                 (3,'Alta'))
-    
     class Meta:
         model = Ticket
-        fields=['titulo', 'descripcion','prioridad','empresa']
+        fields=['titulo','descripcion','prioridad','nombre_empresa']
 
     titulo=forms.CharField(
             label='Título', 
@@ -72,11 +68,11 @@ class TicketForm(forms.ModelForm):
     
     prioridad=forms.ChoiceField(
             label='Prioridad',
-            choices=PRIORIDAD,
+            choices = Ticket.PRIORIDAD,
             widget=forms.Select()
         )
     
-    empresa = forms.ModelChoiceField(
+    nombre_empresa = forms.ModelChoiceField(
         label='Empresa', 
         queryset=Empresa.objects.filter(baja=False),
         widget=forms.Select()

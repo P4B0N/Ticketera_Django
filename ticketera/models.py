@@ -28,13 +28,13 @@ class Usuario (models.Model):
     apellido_usuario = models.CharField(max_length=50, verbose_name="Apellido")
     email_usuario = models.EmailField(max_length=50, verbose_name="Email")
     telefono_usuario = models.CharField(max_length=50, verbose_name="Teléfono")
-    nombre_empresa = models.CharField(max_length=50, verbose_name="Empresa")
+    nombre_empresa = models.ForeignKey(Empresa, on_delete=models.CASCADE, verbose_name="Empresa")
     usuario = models.CharField(max_length=50, verbose_name="Usuario")
-    contraseña_usuario = models.CharField(max_length=50, verbose_name="Contraseña")#(label="Password", widget=forms.PasswordInput, strip=False)
+    contrasenia_usuario = models.CharField(max_length=50, verbose_name="Contraseña")#(label="Password", widget=forms.PasswordInput, strip=False)
     baja = models.BooleanField(default=False)
       
     def __str__(self):
-        return self.nombre_empresa
+        return self.nombre_usuario
     
     def soft_delete(self):
         self.baja = True
@@ -46,10 +46,19 @@ class Usuario (models.Model):
         
     
 class Ticket (models.Model):
+    
+    PRIORIDAD = ((1,'Baja'),
+                 (2,'Media'),
+                 (3,'Alta'))
+    
+    ESTADO = ((1,'Espera'), 
+              (2,'En curso'),
+              (3,'Resuelto'))
+    
     titulo = models.CharField(max_length=50, verbose_name="Título")
     descripcion = models.CharField(max_length=50, verbose_name="Descripción")
-    prioridad = models.CharField(max_length=50, verbose_name="Prioridad")
-    estado = models.CharField(max_length=50, verbose_name="Estado", default="Espera")
+    prioridad = models.IntegerField(choices=PRIORIDAD, verbose_name="Prioridad")
+    estado = models.IntegerField(choices=ESTADO, default=1, verbose_name="Estado")
     fecha_creacion = models.DateField(verbose_name="Fecha de creación", default=timezone.now())
     fecha_cierre = models.DateField(verbose_name="Fecha de cierre", default=timezone.now()+timedelta(days=30)) 
     usuario = models.ManyToManyField(Usuario, verbose_name="Usuario")
