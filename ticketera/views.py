@@ -11,7 +11,7 @@ from django.contrib import messages
 from django.conf import settings
 
 
-nombre="nombre_de_usuario"  # Nombre del usuario logueado
+nombre=""  # Nombre del usuario logueado
 
 # Create your views here.
 def index(request):
@@ -31,7 +31,7 @@ def confirmacion_ticket(request):
 
 @login_required(login_url=settings.LOGIN_URL)
 def envio_confirmado(request):
-    return render(request, "ticketera/envio_confirmado.html",{"nombre":nombre})
+    return render(request, "ticketera/envio_confirmado.html")
 
 def login(request):
     if request.method == 'POST':
@@ -46,7 +46,7 @@ def login(request):
             messages.error(request, f'Usuario o password incorrecto.')
     if not request.user.is_authenticated:
         form = AuthenticationForm()
-        return render(request, "ticketera/login.html",{"nombre":nombre, 'form': form})
+        return render(request, "ticketera/login.html",{'form': form})
     else:
         return redirect('bienvenida', request.user)
 
@@ -57,7 +57,7 @@ def nuevo_ticket(request):
         formulario.save()
         messages.success(request,'Se ha creado el ticket correctamente')          
         return redirect('envio_confirmado')
-    return render(request, "ticketera/nuevo_ticket.html",{"nombre":nombre, "formulario":formulario})
+    return render(request, "ticketera/nuevo_ticket.html",{"formulario":formulario})
 
 def registro(request):
     formulario = UsuarioForm(request.POST or None,request.FILES or None)
@@ -77,15 +77,15 @@ def registro(request):
 @login_required(login_url=settings.LOGIN_URL)
 def seguimiento(request):
     tickets = Ticket.objects.all()
-    return render(request, "ticketera/seguimiento.html",{"nombre":nombre, "tickets":tickets})
+    return render(request, "ticketera/seguimiento.html",{"tickets":tickets})
 
 @login_required(login_url=settings.LOGIN_URL)
 def respuesta_ticket(request):
-    return render(request, "ticketera/respuesta_ticket.html",{"nombre":nombre})
+    return render(request, "ticketera/respuesta_ticket.html")
 
 @login_required(login_url=settings.LOGIN_URL)
 def respuesta_enviada(request):
-    return render(request, "ticketera/respuesta_enviada.html",{"nombre":nombre})
+    return render(request, "ticketera/respuesta_enviada.html")
 
 def registro_empresa(request):
     formulario = EmpresaForm(request.POST or None,request.FILES or None)
