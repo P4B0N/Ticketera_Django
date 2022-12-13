@@ -50,17 +50,17 @@ class UsuarioForm(forms.ModelForm):
     
     class Meta:
         model = Usuario
-        fields=['telefono_usuario','nombre_empresa']
+        fields=['telefono_usuario','empresa']
     
     telefono_usuario=forms.CharField(
             label='Teléfono', 
             widget=forms.TextInput()
         )
     
-    nombre_empresa=forms.ModelChoiceField(
-            label='Nombre de Empresa',
+    empresa=forms.ModelMultipleChoiceField(
+            label='Nombre de Empresa/s',
             queryset=Empresa.objects.filter(baja=False),
-            widget=forms.Select()
+            widget=forms.CheckboxSelectMultiple()
         )
                
 
@@ -68,7 +68,7 @@ class TicketForm(forms.ModelForm):
     
     class Meta:
         model = Ticket
-        fields=['titulo','descripcion','prioridad','nombre_empresa']
+        fields=['titulo','descripcion','prioridad','empresa','usuario']
 
     titulo=forms.CharField(
             label='Título', 
@@ -86,12 +86,18 @@ class TicketForm(forms.ModelForm):
             widget=forms.Select()
         )
     
-    nombre_empresa = forms.ModelChoiceField(
+    empresa = forms.ModelChoiceField(
         label='Empresa', 
-        queryset=Empresa.objects.filter(baja=False),
+        queryset=Empresa.objects.all(),
         widget=forms.Select()
     )
     
+    usuario = forms.ModelChoiceField(
+        label='',
+        queryset=Usuario.objects.all(),
+        widget=forms.HiddenInput()
+    )
+
 
 class EmpresaForm(forms.ModelForm):
     

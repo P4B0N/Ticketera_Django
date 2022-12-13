@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from ticketera.models import Ticket
+from ticketera.models import Ticket, Usuario, Empresa
 from ticketera.forms import UsuarioForm, UserForm, TicketForm, EmpresaForm
 
 from  django.contrib.auth import logout, authenticate, login as auth_login
@@ -53,6 +53,12 @@ def login(request):
 @login_required(login_url=settings.LOGIN_URL)
 def nuevo_ticket(request):
     formulario = TicketForm(request.POST or None,request.FILES or None)
+    
+    formulario.fields['empresa'].queryset = Empresa.objects.filter(usuario__user=request.user, baja=False)
+    
+    usuario_activo = Usuario.objects.filter(user=request.user)
+    formulario.fields['usuario'].initial = usuario_activo[0]
+    
     if formulario.is_valid():
         formulario.save()
         messages.success(request,'Se ha creado el ticket correctamente')          
@@ -69,6 +75,7 @@ def registro(request):
         usuario.user = usuario_user
         
         usuario.save()
+        formulario.save_m2m()
         
         messages.success(request,'Se ha creado el usuario correctamente')          
         return redirect('login')
