@@ -31,7 +31,7 @@ class Usuario (models.Model):
     #apellido_usuario = models.CharField(max_length=50, verbose_name="Apellido")
     #email_usuario = models.EmailField(max_length=50, verbose_name="Email")
     telefono_usuario = models.CharField(max_length=50, verbose_name="Teléfono")
-    nombre_empresa = models.ForeignKey(Empresa, on_delete=models.CASCADE, verbose_name="Empresa")
+    empresa = models.ManyToManyField(Empresa, verbose_name="Empresa")
     #usuario = models.CharField(max_length=50, verbose_name="Usuario")
     #contrasenia_usuario = models.CharField(max_length=50, verbose_name="Contraseña") #(label="Password", widget=forms.PasswordInput, strip=False)
     #baja = models.BooleanField(default=False)
@@ -64,8 +64,8 @@ class Ticket (models.Model):
     estado = models.IntegerField(choices=ESTADO, default=1, verbose_name="Estado")
     fecha_creacion = models.DateField(verbose_name="Fecha de creación", default=timezone.now())
     fecha_cierre = models.DateField(verbose_name="Fecha de cierre", default=timezone.now()+timedelta(days=30)) 
-    usuario = models.ManyToManyField(Usuario, verbose_name="Usuario")
-    nombre_empresa = models.ForeignKey(Empresa, on_delete=models.CASCADE, verbose_name="Empresa")
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, verbose_name="Usuario")
+    empresa = models.ForeignKey(Empresa, on_delete=models.CASCADE, verbose_name="Empresa")
     
     def __str__(self):
         return self.titulo
