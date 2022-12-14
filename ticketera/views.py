@@ -52,17 +52,20 @@ def login(request):
 
 @login_required(login_url=settings.LOGIN_URL)
 def nuevo_ticket(request):
-    formulario = TicketForm(request.POST or None,request.FILES or None)
-    
-    formulario.fields['empresa'].queryset = Empresa.objects.filter(usuario__user=request.user, baja=False)
-    
-    usuario_activo = Usuario.objects.filter(user=request.user)
-    formulario.fields['usuario'].initial = usuario_activo[0]
-    
-    if formulario.is_valid():
-        formulario.save()
-        messages.success(request,'Se ha creado el ticket correctamente')          
-        return redirect('envio_confirmado')
+    if not request.user.is_staff and not request.user.usuario.es_supervisor and not request.user.usuario.es_empleado:
+        formulario = TicketForm(request.POST or None,request.FILES or None)
+        
+        formulario.fields['empresa'].queryset = Empresa.objects.filter(usuario__user=request.user, baja=False)
+        
+        usuario_activo = Usuario.objects.filter(user=request.user)
+        formulario.fields['usuario'].initial = usuario_activo[0]
+        
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request,'Se ha creado el ticket correctamente')          
+            return redirect('envio_confirmado')
+    else:
+        return redirect('index')
     return render(request, "ticketera/nuevo_ticket.html",{"formulario":formulario})
 
 def registro(request):

@@ -16,8 +16,9 @@ Bienvenido
                 <br/>
                 <br/>
                 <br/>
+                {% if not request.user.is_staff and not request.user.usuario.es_supervisor and not request.user.usuario.es_empleado %}
                 <a href="{% url "nuevo_ticket" %}"><input type="button" value="INICIAR TICKET"></a>
-                <a href="{% url "seguimiento" %}"><input type="button" value="SEGUIR TICKET"></a>
-                <a href="{% url "respuesta_ticket" %}"><input type="button" value="RESPONDER TICKET"></a>
+                {% endif %}
+                <a href="{% url "seguimiento" %}"><input type="button" value="SEGUIR TICKETS"></a>
             </div>
 {% endblock contenido %}

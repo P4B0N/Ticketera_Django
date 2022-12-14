@@ -31,6 +31,8 @@ Seguimiento
     </div>
     <br/>
     <a href="{% url "index" %}"><input type="button" value="Atrás"></a>
+    {% if not request.user.is_staff and not request.user.usuario.es_supervisor and not request.user.usuario.es_empleado %}
      <a href="{% url "nuevo_ticket" %}"><input type="button" value="Nuevo Ticket"></a>
+    {% endif %}
 </div>
 {% endblock contenido %}
