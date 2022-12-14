@@ -50,7 +50,7 @@ class UsuarioForm(forms.ModelForm):
     
     class Meta:
         model = Usuario
-        fields=['telefono_usuario','empresa']
+        fields=['telefono_usuario','empresa','es_supervisor','es_empleado']
     
     telefono_usuario=forms.CharField(
             label='Teléfono', 
@@ -61,6 +61,16 @@ class UsuarioForm(forms.ModelForm):
             label='Nombre de Empresa/s',
             queryset=Empresa.objects.filter(baja=False),
             widget=forms.CheckboxSelectMultiple()
+        )
+    
+    es_supervisor=forms.BooleanField(
+            label='Es supervisor?',
+            required=False
+        )
+    
+    es_empleado=forms.BooleanField(
+            label='Es empleado?',
+            required=False
         )
                
 

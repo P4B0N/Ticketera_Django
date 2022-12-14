@@ -35,6 +35,8 @@ class Usuario (models.Model):
     #usuario = models.CharField(max_length=50, verbose_name="Usuario")
     #contrasenia_usuario = models.CharField(max_length=50, verbose_name="Contraseña") #(label="Password", widget=forms.PasswordInput, strip=False)
     #baja = models.BooleanField(default=False)
+    es_supervisor = models.BooleanField(default=False)
+    es_empleado = models.BooleanField(default=False)
       
     def __str__(self):
         return (self.user.first_name +" "+ self.user.last_name)

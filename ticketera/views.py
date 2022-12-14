@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from ticketera.models import Ticket, Usuario, Empresa
 from ticketera.forms import UsuarioForm, UserForm, TicketForm, EmpresaForm
+from django import forms
 
-from  django.contrib.auth import logout, authenticate, login as auth_login
+from django.contrib.auth import logout, authenticate, login as auth_login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 
@@ -35,7 +36,6 @@ def envio_confirmado(request):
 
 def login(request):
     if request.method == 'POST':
-        # AuthenticationForm_can_also_be_used__
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
@@ -66,19 +66,63 @@ def nuevo_ticket(request):
     return render(request, "ticketera/nuevo_ticket.html",{"formulario":formulario})
 
 def registro(request):
-    formulario = UsuarioForm(request.POST or None,request.FILES or None)
-    formulario_user = UserForm(request.POST or None,request.FILES or None)
-    if formulario.is_valid() and formulario_user.is_valid():
-        usuario = formulario.save(commit=False)
+    if not request.user.is_authenticated:
+        formulario_user = UserForm(request.POST or None,request.FILES or None)
+        formulario = UsuarioForm(request.POST or None,request.FILES or None)
         
-        usuario_user = formulario_user.save()
-        usuario.user = usuario_user
+        formulario.fields['es_supervisor'].label = ''
+        formulario.fields['es_supervisor'].initial = False
+        formulario.fields['es_supervisor'].widget = forms.HiddenInput()
+        formulario.fields['es_empleado'].label = ''
+        formulario.fields['es_empleado'].initial = False
+        formulario.fields['es_empleado'].widget = forms.HiddenInput()
         
-        usuario.save()
-        formulario.save_m2m()
+        if formulario.is_valid() and formulario_user.is_valid():
+            usuario = formulario.save(commit=False)
+            
+            usuario_user = formulario_user.save()
+            usuario.user = usuario_user
+            
+            usuario.save()
+            formulario.save_m2m()
+            
+            messages.success(request,'Se ha creado el usuario correctamente')          
+            return redirect('login')
+    elif request.user.is_staff:
+        formulario_user = UserForm(request.POST or None,request.FILES or None)
+        formulario = UsuarioForm(request.POST or None,request.FILES or None)
+        if formulario.is_valid() and formulario_user.is_valid():
+            usuario = formulario.save(commit=False)
+            
+            usuario_user = formulario_user.save()
+            usuario.user = usuario_user
+            
+            usuario.save()
+            formulario.save_m2m()
+            
+            messages.success(request,'Se ha creado el usuario correctamente')          
+            return redirect('login')
+    elif request.user.usuario.es_supervisor:
+        formulario_user = UserForm(request.POST or None,request.FILES or None)
+        formulario = UsuarioForm(request.POST or None,request.FILES or None)
         
-        messages.success(request,'Se ha creado el usuario correctamente')          
-        return redirect('login')
+        formulario.fields['es_supervisor'].label = ''
+        formulario.fields['es_supervisor'].initial = False
+        formulario.fields['es_supervisor'].widget = forms.HiddenInput()
+        
+        if formulario.is_valid() and formulario_user.is_valid():
+            usuario = formulario.save(commit=False)
+            
+            usuario_user = formulario_user.save()
+            usuario.user = usuario_user
+            
+            usuario.save()
+            formulario.save_m2m()
+            
+            messages.success(request,'Se ha creado el usuario correctamente')          
+            return redirect('login')
+    else:
+        return redirect('index')
     return render(request, "ticketera/registro.html",{"formulario":formulario, "formulario_user":formulario_user})
 
 @login_required(login_url=settings.LOGIN_URL)
@@ -95,9 +139,14 @@ def respuesta_enviada(request):
     return render(request, "ticketera/respuesta_enviada.html")
 
 def registro_empresa(request):
-    formulario = EmpresaForm(request.POST or None,request.FILES or None)
-    if formulario.is_valid():
-        formulario.save()
-        messages.success(request,'Se ha registrado la empresa correctamente')          
-        return redirect('login')
+    if not request.user.is_authenticated:
+        return redirect('index')
+    elif request.user.is_staff or request.user.usuario.es_supervisor:
+        formulario = EmpresaForm(request.POST or None,request.FILES or None)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request,'Se ha registrado la empresa correctamente')          
+            return redirect('login')
+    else:
+        return redirect('index')
     return render(request, "ticketera/registro_empresa.html",{"formulario":formulario})
