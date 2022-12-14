@@ -9,21 +9,43 @@ Seguimiento
         <table class="table">
             <thead>
                 <tr>
-                    <th>Id</th>
                     <th>Titulo</th>
                     <th>Prioridad</th>
                     <th>Estado</th>
                     <th>Fecha de creación</th>
+                    <th>Empresa</th>
+                    {% if request.user.is_staff or request.user.usuario.es_supervisor or request.user.usuario.es_empleado %}
+                        <th>Autor</th>
+                    {% endif %}
                 </tr>
             </thead>
             <tbody>
                 {% for ticket in tickets %}
                     <tr>
-                        <td>{{ticket.id}}</td>
                         <td>{{ticket.titulo}}</td>
-                        <td>{{ticket.prioridad}}</td>
-                        <td>{{ticket.estado}}</td>
+                        <td>
+                            {% if ticket.prioridad == 1%}
+                            Baja
+                            {% elif ticket.prioridad == 2 %}
+                            Media
+                            {% elif ticket.prioridad == 3 %}
+                            Alta
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if ticket.estado == 1%}
+                            Espera
+                            {% elif ticket.estado == 2 %}
+                            En curso
+                            {% elif ticket.estado == 3 %}
+                            Resuelto
+                            {% endif %}
+                        </td>
                         <td>{{ticket.fecha_creacion}}</td>
+                        <td>{{ticket.empresa}}</td>
+                        {% if request.user.is_staff or request.user.usuario.es_supervisor or request.user.usuario.es_empleado %}
+                            <td>{{ticket.usuario}}</td>
+                        {% endif %}
                     </tr>
                 {% endfor %}
             </tbody>

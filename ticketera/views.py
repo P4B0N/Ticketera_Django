@@ -130,7 +130,13 @@ def registro(request):
 
 @login_required(login_url=settings.LOGIN_URL)
 def seguimiento(request):
-    tickets = Ticket.objects.all()
+    #tickets = Ticket.objects.all()
+    if request.user.is_staff or request.user.usuario.es_supervisor:
+        tickets = Ticket.objects.all()
+    elif request.user.usuario.es_empleado:
+        tickets = Ticket.objects.filter(empresa__in=request.user.usuario.empresa.all())
+    else:
+        tickets = Ticket.objects.filter(usuario=request.user.usuario)
     return render(request, "ticketera/seguimiento.html",{"tickets":tickets})
 
 @login_required(login_url=settings.LOGIN_URL)
