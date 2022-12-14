@@ -78,7 +78,7 @@ class TicketForm(forms.ModelForm):
     
     class Meta:
         model = Ticket
-        fields=['titulo','descripcion','prioridad','empresa','usuario']
+        fields=['titulo','descripcion','prioridad','empresa','usuario','respuesta','estado']
 
     titulo=forms.CharField(
             label='Título', 
@@ -92,7 +92,7 @@ class TicketForm(forms.ModelForm):
     
     prioridad=forms.ChoiceField(
             label='Prioridad',
-            choices = Ticket.PRIORIDAD,
+            choices=Ticket.PRIORIDAD,
             widget=forms.Select()
         )
     
@@ -106,6 +106,20 @@ class TicketForm(forms.ModelForm):
         label='',
         queryset=Usuario.objects.all(),
         widget=forms.HiddenInput()
+    )
+    
+    respuesta = forms.CharField(
+        label='',
+        required=False,
+        widget=forms.HiddenInput()
+    )
+    
+    estado=forms.ChoiceField(
+            label='Estado',
+            choices=Ticket.ESTADO,
+            disabled=True,
+            initial=1,
+            widget=forms.Select()
     )
 
 

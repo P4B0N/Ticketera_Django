@@ -6,23 +6,26 @@ Respuesta a ticket
 <div class="container">
     <h1 class="articulo_titulo">Respuesta a Ticket</h1><br/>
     <div align="left" >
-    <h2 class="articulo_texto">Ticket Nº 001-01</h2><br/>
-    <h2 class="articulo_texto">Empresa</h2><p class="articulo_texto">Next.SRL</p>
-    <h2 class="articulo_texto">Motivo </h2><p class="articulo_texto">Software de Escritorio </p>    
-    <h2 class="articulo_texto">Detalles </h2><p class="articulo_texto">Necesito instalar el Software en una nueva PC, como procedo </p>
-    <h2 class="articulo_texto">Prioridad </h2><p class="articulo_texto">Normal </p>
-    <h2 class="articulo_texto">Estado </h2>
-    <select name="Estado">
-        <option>Espera</option>
-        <option>En curso</option>
-        <option>Resuelto</option>
-    </select>
-    <h2 class="articulo_texto">Respuesta:</h2>
-    <textarea name="texto" cols="80" rows="10" placeholder="Escriba la respuesta al ticket" 
-    required></textarea>
+        <h2 class="articulo_texto">Ticket Nº{{ticket.id}}</h2><br/>
+        <h2 class="articulo_texto">Autor</h2><p class="articulo_texto">{{ticket.usuario}}</p><br/>
+        <h2 class="articulo_texto">Empresa</h2><p class="articulo_texto">{{ticket.empresa}}</p><br/>
+        <h2 class="articulo_texto">Fecha de creación</h2><p class="articulo_texto">{{ticket.fecha_creacion}}</p><br/>
     </div>
-    <br/>
-    <a href="{% url "index" %}"><input type="button" value="Atrás"></a>
-    <a href="{% url "respuesta_enviada" %}"><input type="button" value="Confirmar"></a>
+    <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for campo in formulario %}
+            <div>
+                <label for=""><b>{{campo.label}}</b></label>
+                {{campo}}
+            </div>
+            <div>{{campo.errors}}</div>
+            {% endfor %}
+            <div >
+            <div >
+                <input type="submit" value="Confirmar">
+                <a href="{% url "seguimiento" %}"><input type="button" value="Atrás"></a>        
+            </div>
+    </div>
+        </form>
 </div>
 {% endblock contenido %}
