@@ -26,8 +26,18 @@
             </button>
             <ul class="nav-menu">
               {% if user.is_authenticated %}
-                <p>Bienvenido/a, <b>{{ user.username }}</b>.</p>
-                <a type="button" href="{% url 'logout' %}">Cerrar sesión</a>
+                <li>
+                  <p>Bienvenido/a, <b>{{ user.username }}</b>.</p>
+                  <a type="button" href="{% url 'logout' %}">Cerrar sesión</a>
+                </li>
+                {% if request.user.is_staff or request.user.usuario.es_supervisor %}
+                <li class="nav-menu-item">
+                  <a href="{% url "registro" %}"><b>Registrar usuario</b></a>
+                </li>
+                <li class="nav-menu-item">
+                  <a href="{% url "registro_empresa" %}"><b>Registrar empresa</b></a>
+                </li>
+                {% endif %}
               {% else %}
               <li class="nav-menu-item">
                 <a href="{% url "registro" %}" class="nav-menu-link nav-link nav-menu-link_registrarse">Registrarse</a>

@@ -8,7 +8,7 @@ Registro de Empresa
         {% csrf_token %}
         {% for campo in formulario %}
         <div>
-            <label for="">{{campo.label}}</label>
+            <label for=""><b>{{campo.label}}</b></label>
             {{campo}}
         </div>
         <div>{{campo.errors}}</div>
