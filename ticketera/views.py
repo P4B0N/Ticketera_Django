@@ -11,6 +11,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.conf import settings
 
+from django.utils import timezone
+
 
 nombre=""  # Nombre del usuario logueado
 
@@ -141,8 +143,29 @@ def ver_ticket(request, ticket_id):
 
 @login_required(login_url=settings.LOGIN_URL)
 def respuesta_ticket(request, ticket_id):
-    ticket = Ticket.objects.get(pk=ticket_id)
-    return render(request, "ticketera/respuesta_ticket.html",{"ticket":ticket})
+    if request.user.is_staff or request.user.usuario.es_empleado:
+        ticket = Ticket.objects.get(pk=ticket_id)
+        formulario = TicketForm(request.POST or None,request.FILES or None,instance=ticket)
+        
+        formulario.fields['titulo'].disabled=True
+        formulario.fields['descripcion'].disabled=True
+        formulario.fields['prioridad'].disabled=True
+        formulario.fields['empresa'].disabled=True
+        formulario.fields['respuesta'].label='Respuesta'
+        formulario.fields['respuesta'].required=True
+        formulario.fields['respuesta'].widget=forms.Textarea(attrs={'rows': 5})
+        formulario.fields['estado'].disabled=False
+        
+        if formulario.is_valid():
+            if formulario.cleaned_data['estado'] == 3:
+                ticket.fecha_cierre = timezone.now()
+                ticket.save(['fecha_cierre'])
+            formulario.save()
+            messages.success(request,'Se ha editado el ticket correctamente')          
+            return redirect('respuesta_enviada')
+        return render(request, "ticketera/respuesta_ticket.html",{"ticket":ticket, 'formulario':formulario})
+    else:
+        return redirect('seguimiento')
 
 @login_required(login_url=settings.LOGIN_URL)
 def respuesta_enviada(request):

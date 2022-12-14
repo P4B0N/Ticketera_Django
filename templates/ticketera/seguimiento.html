@@ -48,12 +48,15 @@ Seguimiento
                         {% if request.user.is_staff or request.user.usuario.es_supervisor or request.user.usuario.es_empleado %}
                             <td>{{ticket.usuario}}</td>
                         {% endif %}
-                        <td>
-                            <a href="{% url "ver_ticket" ticket.id %}">VER</a>
-                        </td>
-                        <td>
-                            <a href="{% url "respuesta_ticket" ticket.id %}">RESPONDER</a>
-                        </td>
+                            <td>
+                                <a href="{% url "ver_ticket" ticket.id %}">VER</a>
+                            </td>
+                        {% if request.user.is_staff or request.user.usuario.es_empleado %}
+                            <td>
+                                <a href="{% url "respuesta_ticket" ticket.id %}">RESPONDER</a>
+                            </td>
+                        {% endif %}
+                        
                     </tr>
                 {% endfor %}
             </tbody>

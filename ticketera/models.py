@@ -61,13 +61,14 @@ class Ticket (models.Model):
               (3,'Resuelto'))
     
     titulo = models.CharField(max_length=50, verbose_name="Título")
-    descripcion = models.CharField(max_length=50, verbose_name="Descripción")
+    descripcion = models.CharField(max_length=300, verbose_name="Descripción")
     prioridad = models.IntegerField(choices=PRIORIDAD, verbose_name="Prioridad")
     estado = models.IntegerField(choices=ESTADO, default=1, verbose_name="Estado")
     fecha_creacion = models.DateField(verbose_name="Fecha de creación", default=timezone.now())
     fecha_cierre = models.DateField(verbose_name="Fecha de cierre", default=timezone.now()+timedelta(days=30)) 
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, verbose_name="Usuario")
     empresa = models.ForeignKey(Empresa, on_delete=models.CASCADE, verbose_name="Empresa")
+    respuesta = models.CharField(max_length=300, default="", verbose_name="Respuesta")
     
     def __str__(self):
         return self.titulo

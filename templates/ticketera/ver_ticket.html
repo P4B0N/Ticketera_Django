@@ -7,9 +7,13 @@ Visualización de ticket
     <h1 class="articulo_titulo">Visualización de Ticket</h1><br/>
     <div align="left" >
         <h2 class="articulo_texto">Ticket Nº{{ticket.id}}</h2><br/>
+        {% if request.user.is_staff or request.user.usuario.es_supervisor or request.user.usuario.es_empleado %}
+            <h2 class="articulo_texto">Autor</h2><p class="articulo_texto">{{ticket.usuario}}</p><br/>
+        {% endif %}
         <h2 class="articulo_texto">Empresa</h2><p class="articulo_texto">{{ticket.empresa}}</p><br/>
         <h2 class="articulo_texto">Título</h2><p class="articulo_texto">{{ticket.titulo}}</p><br/>   
         <h2 class="articulo_texto">Descripción</h2><p class="articulo_texto">{{ticket.descripcion}}</p><br/>
+        <h2 class="articulo_texto">Fecha de creación</h2><p class="articulo_texto">{{ticket.fecha_creacion}}</p><br/>
         <h2 class="articulo_texto">Prioridad</h2><p class="articulo_texto">
             {% if ticket.prioridad == 1%}
             Baja
@@ -19,6 +23,7 @@ Visualización de ticket
             Alta
             {% endif %}
         </p><br/>
+        <h2 class="articulo_texto">Respuesta</h2><p class="articulo_texto">{{ticket.respuesta}}</p><br/>
         <h2 class="articulo_texto">Estado</h2><p class="articulo_texto">
             {% if ticket.estado == 1%}
             Espera
