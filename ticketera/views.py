@@ -27,10 +27,6 @@ def bienvenida(request, nombre):
     return render(request, "ticketera/bienvenida.html", {"nombre":nombre})
 
 @login_required(login_url=settings.LOGIN_URL)
-def confirmacion_ticket(request):
-    return render(request, "ticketera/confirmacion_ticket.html")
-
-@login_required(login_url=settings.LOGIN_URL)
 def envio_confirmado(request):
     return render(request, "ticketera/envio_confirmado.html")
 
@@ -130,7 +126,6 @@ def registro(request):
 
 @login_required(login_url=settings.LOGIN_URL)
 def seguimiento(request):
-    #tickets = Ticket.objects.all()
     if request.user.is_staff or request.user.usuario.es_supervisor:
         tickets = Ticket.objects.all()
     elif request.user.usuario.es_empleado:
@@ -140,8 +135,14 @@ def seguimiento(request):
     return render(request, "ticketera/seguimiento.html",{"tickets":tickets})
 
 @login_required(login_url=settings.LOGIN_URL)
-def respuesta_ticket(request):
-    return render(request, "ticketera/respuesta_ticket.html")
+def ver_ticket(request, ticket_id):
+    ticket = Ticket.objects.get(pk=ticket_id)
+    return render(request, "ticketera/ver_ticket.html",{"ticket":ticket})
+
+@login_required(login_url=settings.LOGIN_URL)
+def respuesta_ticket(request, ticket_id):
+    ticket = Ticket.objects.get(pk=ticket_id)
+    return render(request, "ticketera/respuesta_ticket.html",{"ticket":ticket})
 
 @login_required(login_url=settings.LOGIN_URL)
 def respuesta_enviada(request):

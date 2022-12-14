@@ -9,6 +9,7 @@ Seguimiento
         <table class="table">
             <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Titulo</th>
                     <th>Prioridad</th>
                     <th>Estado</th>
@@ -22,6 +23,7 @@ Seguimiento
             <tbody>
                 {% for ticket in tickets %}
                     <tr>
+                        <td>{{ticket.id}}</td>
                         <td>{{ticket.titulo}}</td>
                         <td>
                             {% if ticket.prioridad == 1%}
@@ -46,6 +48,12 @@ Seguimiento
                         {% if request.user.is_staff or request.user.usuario.es_supervisor or request.user.usuario.es_empleado %}
                             <td>{{ticket.usuario}}</td>
                         {% endif %}
+                        <td>
+                            <a href="{% url "ver_ticket" ticket.id %}">VER</a>
+                        </td>
+                        <td>
+                            <a href="{% url "respuesta_ticket" ticket.id %}">RESPONDER</a>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>
