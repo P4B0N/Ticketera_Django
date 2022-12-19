@@ -6,22 +6,24 @@ Login
 <div class="container">
     <h1 class="articulo_titulo">Ingresar</h1><br/>
     <div align="center" >
-    <form method="POST">
-        {% csrf_token %}
-        <h3 class="articulo_texto">Usuario:</h2>
-        <input type="text" id="{{ form.username.auto_id }}" name="{{ form.username.name }}" placeholder="Nombre de usuario" value="{{ form.username.value | default:'' }}" />
-        <div>{{form.username.errors}}</div>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="{{ form.username.auto_id }}" class="form-label"><b>Usuario:</b></label>
+            <input style="width: 50%" type="text" class="form-control" id="{{ form.username.auto_id }}" name="{{ form.username.name }}" placeholder="Nombre de usuario" value="{{ form.username.value | default:'' }}" />
+            <div>{{form.username.errors}}</div>
 
-        <h3 class="articulo_texto">Contraseña:</h2>
-        <input type="password" id="{{ form.password.auto_id }}" name="{{ form.password.name }}" placeholder="Contraseña" value="{{ form.password.value | default:'' }}" />
-        <div>{{form.password.errors}}</div>
-        
-        <button type="submit">Ingresar</button>
-    </form>
-    <div>
-        {% for message in messages %}
-                {{message}}
-        {% endfor %}
+            <label for="{{ form.password.auto_id }}" class="form-label"><b>Contraseña:</b></label>
+            <input style="width: 50%" type="password" class="form-control" id="{{ form.password.auto_id }}" name="{{ form.password.name }}" placeholder="Contraseña" value="{{ form.password.value | default:'' }}" />
+            <div>{{form.password.errors}}</div>
+            
+            <button type="submit" style="margin: 10px 0 10px 0" class="btn btn-primary">Ingresar</button>
+        </form>
+            {% for message in messages %}
+            <div class="alert alert-secondary alert-dismissible fade show">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    {{message}}
+            </div>
+            {% endfor %}
     </div>
 </div>
 {% endblock contenido %}

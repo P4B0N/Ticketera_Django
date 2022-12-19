@@ -5,9 +5,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   {% load static %}
+  <link rel="stylesheet" href="{% static "bootstrap5/css/bootstrap.min.css" %}">
   <link rel="stylesheet" href="{% static "css/estilos.css" %}">
   <script defer src="{% static "js/fontawesome.js" %}"></script>
   <script defer src="{% static "js/index.js" %}"></script>
+  <script defer src="{% static "bootstrap5/js/bootstrap.bundle.min.js" %}"></script>
   <link rel="icon" type="image/png" href="{% static "img/favicon.png" %}"/>
   <title>
     {% block titulo %}
@@ -26,21 +28,22 @@
             </button>
             <ul class="nav-menu">
               {% if user.is_authenticated %}
-                <li>
-                  <p>Bienvenido/a, <b>{{ user.username }}</b>.</p>
-                  <a type="button" href="{% url 'logout' %}">Cerrar sesión</a>
-                </li>
                 {% if request.user.is_staff or request.user.usuario.es_supervisor %}
                 <li class="nav-menu-item">
-                  <a href="{% url "registro" %}"><b>Registrar usuario</b></a>
+                  <a type="button" class="btn btn-danger btn-sm" href="{% url "registro" %}">Registrar usuario</a>
                 </li>
                 <li class="nav-menu-item">
-                  <a href="{% url "registro_empresa" %}"><b>Registrar empresa</b></a>
+                  <a type="button" class="btn btn-danger btn-sm" href="{% url "registro_empresa" %}">Registrar empresa</a>
                 </li>
                 {% endif %}
+                <li>
+                  <p class="text-light">Bienvenido/a, <b>{{ user.username }}</b>.</p>
+                  <a type="button" class="btn btn-outline-warning btn-sm" href="{% url 'logout' %}">Cerrar sesión</a>
+                </li>
+                
               {% else %}
               <li class="nav-menu-item">
-                <a href="{% url "registro" %}" class="nav-menu-link nav-link nav-menu-link_registrarse">Registrarse</a>
+                <a href="{% url "registro" %}" class="btn btn-danger">Registrarse</a>
               </li>
               {% endif %}
             </ul>

@@ -13,12 +13,10 @@ Registro de Empresa
         </div>
         <div>{{campo.errors}}</div>
         {% endfor %}
-        <div >
-        <div >
-            <input type="submit" value="Registrar">
-            <a href="{% url "index" %}"><input type="button" value="Atrás"></a>
+        <div style="margin-top:10px">
+            <input type="submit" class="btn btn-success" value="Registrar">
+            <a type="button" class="btn btn-secondary" href="{% url "index" %}">Atrás</a>
         </div>
-</div>
     </form>
 </div>
 {% endblock contenido %}

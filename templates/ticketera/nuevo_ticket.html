@@ -8,19 +8,17 @@ Nuevo ticket
         {% csrf_token %}
         {% for campo in formulario %}
         <div>
-            <label for=""><b>{{campo.label}}</b></label>
+            <label for="" class="form-label"><b>{{campo.label}}</b></label>
             {{campo}}
         </div>
         <div>{{campo.errors}}</div>
         {% endfor %}
-        <div >
-        <div >
-            <input type="submit" value="Enviar">
-            <a href="{% url "index" %}"><input type="button" value="Atrás"></a>        
+        <div>
+        <div style="margin: 10px 0 10px 0">
+            <input type="submit" class="btn btn-success" value="Enviar">
+            <a type="button" class="btn btn-secondary" href="{% url "index" %}">Atrás</a>        
         </div>
-</div>
+        </div>
     </form>
-    </div>
-    <br/>
 </div>
 {% endblock contenido %}
