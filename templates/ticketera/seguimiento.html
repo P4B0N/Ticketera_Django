@@ -5,10 +5,10 @@ Seguimiento
 {% block contenido %}
 <div class="container">
     <h1 class="articulo_titulo">Seguimiento</h1>
-    <div align="center" >
-        <table class="table">
+    <div align="center">
+        <table class="table table-striped table-bordered table-responsive table-responsive-md">
             <thead>
-                <tr>
+                <tr class="table-info">
                     <th>ID</th>
                     <th>Titulo</th>
                     <th>Prioridad</th>
@@ -36,11 +36,11 @@ Seguimiento
                         </td>
                         <td>
                             {% if ticket.estado == 1%}
-                            Espera
+                            <p class="text-dark">Espera</p>
                             {% elif ticket.estado == 2 %}
-                            En curso
+                            <p class="text-info">En curso</p>
                             {% elif ticket.estado == 3 %}
-                            Resuelto
+                            <p class="text-success">Resuelto</p>
                             {% endif %}
                         </td>
                         <td>{{ticket.fecha_creacion}}</td>
@@ -49,11 +49,11 @@ Seguimiento
                             <td>{{ticket.usuario}}</td>
                         {% endif %}
                             <td>
-                                <a href="{% url "ver_ticket" ticket.id %}">VER</a>
+                                <a type="button" class="btn btn-primary btn-sm" href="{% url "ver_ticket" ticket.id %}">VER</a>
                             </td>
                         {% if request.user.is_staff or request.user.usuario.es_empleado %}
                             <td>
-                                <a href="{% url "respuesta_ticket" ticket.id %}">RESPONDER</a>
+                                <a type="button" class="btn btn-success btn-sm" href="{% url "respuesta_ticket" ticket.id %}">RESPONDER</a>
                             </td>
                         {% endif %}
                         
@@ -63,9 +63,9 @@ Seguimiento
         </table>
     </div>
     <br/>
-    <a href="{% url "index" %}"><input type="button" value="Atrás"></a>
+    <a type="button" class="btn btn-secondary" href="{% url "index" %}">Atrás</a>
     {% if not request.user.is_staff and not request.user.usuario.es_supervisor and not request.user.usuario.es_empleado %}
-     <a href="{% url "nuevo_ticket" %}"><input type="button" value="Nuevo Ticket"></a>
+     <a type="button" class="btn btn-primary" href="{% url "nuevo_ticket" %}">Nuevo Ticket</a>
     {% endif %}
 </div>
 {% endblock contenido %}

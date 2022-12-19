@@ -5,16 +5,8 @@ Envío confirmado
 {% block contenido %}
 <div class="container">
     <div align="center" >
-        <br/>
-        <br/>
-        <br/>
-        <h1 class="articulo_titulo">TICKET ENVIADO EXITOSAMENTE!</h1>
-        <br/>
-        <br/>
-        </div>
-        <br/>
-        <br/>
-        <br/>
-        <a href="{% url "index" %}"><input type="button" value="Salir"></a>
+        <h1 style="margin: 100px 0 100px 0" class="articulo_titulo">TICKET ENVIADO EXITOSAMENTE!</h1>
+    </div>
+    <a type="button" class="btn btn-secondary" href="{% url "index" %}">Salir</a>
 </div>
 {% endblock contenido %}

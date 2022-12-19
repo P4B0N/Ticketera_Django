@@ -4,17 +4,17 @@ Visualización de ticket
 {% endblock titulo %}
 {% block contenido %}
 <div class="container">
-    <h1 class="articulo_titulo">Visualización de Ticket</h1><br/>
+    <h1 class="articulo_titulo">Visualización de Ticket</h1>
     <div align="left" >
-        <h2 class="articulo_texto">Ticket Nº{{ticket.id}}</h2><br/>
+        <h4 style="text-decoration: underline" class="articulo_texto">Ticket Nº{{ticket.id}}</h4>
         {% if request.user.is_staff or request.user.usuario.es_supervisor or request.user.usuario.es_empleado %}
-            <h2 class="articulo_texto">Autor</h2><p class="articulo_texto">{{ticket.usuario}}</p><br/>
+            <h4 class="articulo_texto">Autor</h4><p class="articulo_texto">{{ticket.usuario}}</p>
         {% endif %}
-        <h2 class="articulo_texto">Empresa</h2><p class="articulo_texto">{{ticket.empresa}}</p><br/>
-        <h2 class="articulo_texto">Título</h2><p class="articulo_texto">{{ticket.titulo}}</p><br/>   
-        <h2 class="articulo_texto">Descripción</h2><p class="articulo_texto">{{ticket.descripcion}}</p><br/>
-        <h2 class="articulo_texto">Fecha de creación</h2><p class="articulo_texto">{{ticket.fecha_creacion}}</p><br/>
-        <h2 class="articulo_texto">Prioridad</h2><p class="articulo_texto">
+        <h4 class="articulo_texto">Empresa</h4><p class="articulo_texto">{{ticket.empresa}}</p>
+        <h4 class="articulo_texto">Título</h4><p class="articulo_texto">{{ticket.titulo}}</p>   
+        <h4 class="articulo_texto">Descripción</h4><p class="articulo_texto">{{ticket.descripcion}}</p>
+        <h4 class="articulo_texto">Fecha de creación</h4><p class="articulo_texto">{{ticket.fecha_creacion}}</p>
+        <h4 class="articulo_texto">Prioridad</h4><p class="articulo_texto">
             {% if ticket.prioridad == 1%}
             Baja
             {% elif ticket.prioridad == 2 %}
@@ -22,19 +22,20 @@ Visualización de ticket
             {% elif ticket.prioridad == 3 %}
             Alta
             {% endif %}
-        </p><br/>
-        <h2 class="articulo_texto">Respuesta</h2><p class="articulo_texto">{{ticket.respuesta}}</p><br/>
-        <h2 class="articulo_texto">Estado</h2><p class="articulo_texto">
-            {% if ticket.estado == 1%}
-            Espera
-            {% elif ticket.estado == 2 %}
-            En curso
-            {% elif ticket.estado == 3 %}
-            Resuelto
-            {% endif %}
-        </p><br/>
+        </p>
+        <div style="padding: 5px; margin-bottom: 10px" class="card">
+            <h4 class="articulo_texto">Respuesta</h4><p class="articulo_texto">{{ticket.respuesta}}</p>
+            <h4 class="articulo_texto">Estado</h4><p class="articulo_texto">
+                {% if ticket.estado == 1%}
+                Espera
+                {% elif ticket.estado == 2 %}
+                En curso
+                {% elif ticket.estado == 3 %}
+                Resuelto
+                {% endif %}
+            </p>
+        </div>
     </div>
-    <br/>
-    <a href="{% url "seguimiento" %}"><input type="button" value="Atrás"></a>
+    <a type="button" class="btn btn-secondary" href="{% url "seguimiento" %}">Atrás</a>
 </div>
 {% endblock contenido %}

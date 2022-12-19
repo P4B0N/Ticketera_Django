@@ -9,7 +9,7 @@ Registro
 
         {% for campo in formulario_user %}
         <div>
-            <label for=""><b>{{campo.label}}</b></label>
+            <label for="" class="form-label"><b>{{campo.label}}</b></label>
             {{campo}}
         </div>
         <div>{{campo.errors}}</div>
@@ -17,15 +17,15 @@ Registro
 
         {% for campo in formulario %}
         <div>
-            <label for=""><b>{{campo.label}}</b></label>
+            <label for="" class="form-label"><b>{{campo.label}}</b></label>
             {{campo}}
         </div>
         <div>{{campo.errors}}</div>
         {% endfor %}
-        <div >
-        <div >
-            <input type="submit" value="Registrarse">
-            <a href="{% url "index" %}"><input type="button" value="Atrás"></a>   
+        <div>
+        <div>
+            <input type="submit" class="btn btn-success" value="Registrarse">
+            <a type="button" class="btn btn-secondary" href="{% url "index" %}">Atrás</a>   
         </div>
 </div>
     </form>
