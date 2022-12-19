@@ -1,4 +1,4 @@
-# PIG (Codo a Codo 2022): Ticketera
+# P.I.G. (Codo a Codo 2022): Ticketera
 ## Grupo 9
 ### Integrantes:
 - Pablo Bonaduce
